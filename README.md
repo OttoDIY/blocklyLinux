@@ -1,6 +1,8 @@
-# Otto Blockly for Linux
+# Otto Blockly for GNU/Linux OS
+This is a free and open source visual programming language based on Blockly from Google & MIT, Arduino codes are created by just combining the blocks, then they are compiled (check or verified) and quickly [upload to any Otto robot](https://www.ottodiy.com/) or all kins of Arduino projects.
 
-This is a Linux version for Otto Blockly developed by Antonio Gómez and Mª Dolores Nogueras.It's a project still developing. As far as we know, it works in Ubuntu 20
+This is a Linux version for Otto Blockly developed by Antonio Gómez and Mª Dolores Nogueras.It's a project still developing. It works in Ubuntu 20
+For [Windows version go here](https://github.com/OttoDIY/blockly)
 Do you want to compile it?
 
     Install node.js
@@ -9,42 +11,130 @@ Do you want to compile it?
     If you want to test the software, run npm start
     To compile, run npm run compiler
 
-# How to Use (Click in the image to see a video)
+## Installation and dependencies
+### Distribution(s) and kernel(s)
+* Ubuntu 20.04x64
+```
+$ lsb_release -a
+No LSB modules are available.
+Distributor ID:	Ubuntu
+Description:	Ubuntu 20.04.1 LTS
+Release:	20.04
+Codename:	focal
+Linux $MACHINENAME 5.4.0-42-generic #46-Ubuntu SMP Fri Jul 10 00:24:02 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux
+```
+where `$MACHINENAME` is a self-explanatory variable.
 
-[![INTRODUCTIONVIDEO](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4uJPHaEgVEHAybGQLnQQA7Tn6mFHmsTqLcw&usqp=CAU)](https://youtu.be/chcWxh4Co_c)
- 
-  Open any example.
-    Connect your Otto robot.
-    Select Arduino nano and USB port where Otto is connected.
-    Check the code.
-    Upload and yes is that easy!
-    Drag , drop, mix, play and create your own codes.
-    Join the Otto Builder community and share them!
-    Subscribe to our YouTube channel for tutorials
+* Ubuntu 18.04x64
+```
+$ lsb_release -a
+No LSB modules are available.
+Distributor ID:	Ubuntu
+Description:	Ubuntu 18.04.3 LTS
+Release:	18.04
+Codename:	bionic
+$ uname -a
+Linux $MACHINENAME 5.4.0-53-generic #59~18.04.1-Ubuntu SMP Wed Oct 21 12:14:56 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux
+```
+where `$MACHINENAME` is a self-explanatory variable.
 
-# Attribution
+### Dependencies (nodejs, npm)
+Uncomment lines that correspond to your Ubuntu version
+```
+cd
+#curl -sL https://deb.nodesource.com/setup_10.x -o nodesource_setup.sh #ubuntu-18-04
+#curl -sL https://deb.nodesource.com/setup_15.x -o nodesource_setup.sh #ubuntu-20-04
+sudo bash nodesource_setup.sh
+sudo apt install -y nodejs
+#nodejs -v #ubuntu-18-04
+#node -v #ubuntu-20-04
+```
+See the following links to install node-js on [ubuntu-18-04](https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-18-04) or [ubuntu-20-04](https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-20-04).
 
-Thanks to all these tools created by great people. that without them, would have not been possible to make this project:
+### Building project
+```
+git clone https://github.com/ottodiy/blocklylinux
+cd ~/blocklyLinux
+npm install
+sudo chown -R $USER:$(id -gn $USER) /home/$USER/.config
+npm start #to test app
+npm run compiler #To compile
+```
+where `$USER` is a self-explanatory variable. See your `$USER` variable by typing `echo $USER` in the terminal.
 
-    Blockly
-    Blockly@rduino
-    Blocklino
-    BlocklyDuino
-    Ardublockly
-    Bodo Minea
-    Node.js
-    Bootstrap
-    Font Awesome
-    JQuerry
-    electron
-    electron-builder
-    Serialport
-    arduino-builder
-    winAVR
-    Avrdude
-    microbit
-    micropython
-    Python
-    ampy
-    pyflakes
-    NSIS
+### USB connection
+First, [make sure that your user is part of the `dialout` group](https://askubuntu.com/a/58122) if it is necessary in your Linux distribution. You can do this with the following command:
+```
+sudo usermod -a -G dialout $USER
+```
+You need to **reboot** your machine for the group changes to take effect.
+
+Testing the port of arudino with `Board: Arduino Nano; Processor: ATMega328P; Port:/dev/ttyUSB0`
+```
+ls -l /dev/ttyUSB*
+crw-rw---- 1 root dialout 188, 0 Sep 13 08:21 /dev/ttyUSB0
+```
+
+### Cleaning project
+```
+rm -rf dist/
+rm -rf node_modules/
+rm -rf package-lock.json
+```
+
+## How to use
+1. Open Otto Blockly
+2. Open any example.
+3. Connect your Otto robot.
+4. Select `Arduino nano` and USB port where Otto is connected (e.g., `/dev/ttyUSB0`)
+5. Check the code.
+6. Upload and yes is that easy!
+7. Drag , drop, mix, play and create your own codes.  
+
+## How to Contribute
+Contributing to this software is warmly welcomed. There are 5 ways you can contribute to this project:
+1. Test and report.
+2. Helps us [solve current issues](https://github.com/OttoDIY/blockly/issues) or other bugs.
+3. Bring missing features from similar Blockly or Scratch alike programs, request new useful blocks.
+5. Translating to new languages or fixing current ones.
+
+You can do this [basically by forking](https://help.github.com/en/articles/fork-a-repo), committing modifications and then a [pulling requests](https://help.github.com/en/articles/about-pull-requests). Please provide as much details as you can for any changes and make sure they have been tested
+when you do a pull request. Similarly, make sure to keep consistency in the naming.
+
+## Forums and Otto community
+- [Join the Otto Builder community and post your projects!](https://builders.ottodiy.com/) 
+- [Subscribe to our YouTube channel for tutorials](https://www.youtube.com/c/ottodiy?sub_confirmation=1)
+
+## Contributors of Otto/blockly for GNU/Linux OS version 
+- Antonio Gómez [@agomezgar](https://github.com/agomezgar) (Developer) 
+- Mª Dolores Nogueras (Developer)
+- Oresztesz Margaritisz [@gitaroktato](https://github.com/gitaroktato) (tester)
+- Miguel Xochicale [@mxochicale](https://github.com/mxochicale) (tester)
+
+## Attribution
+Thanks to all these tools created by great people. that without them, would have not been possible to make this project:  
+- [Blockly](https://developers.google.com/blockly)
+- [Blockly@rduino](https://github.com/technologiescollege/Blockly-at-rduino)
+- [Blocklino](https://github.com/fontainejp/blocklino/)
+- [BlocklyDuino](https://github.com/BlocklyDuino/BlocklyDuino)
+- [Ardublockly](https://github.com/carlosperate/ardublockly)
+- [Bodo Minea](https://github.com/BodoMinea)
+- [Node.js](https://nodejs.org/)
+- [Bootstrap](http://getbootstrap.com)
+- [Font Awesome](http://fontawesome.io)
+- [JQuerry](https://jquery.com)
+- [electron](https://electronjs.org/)
+- [electron-builder](https://github.com/electron-userland/electron-builder)
+- [Serialport](https://github.com/node-serialport/node-serialport)
+- [arduino-builder](https://github.com/arduino/arduino-builder)
+- [winAVR](https://sourceforge.net/projects/winavr)
+- [Avrdude](http://www.nongnu.org/avrdude)
+- [microbit](https://microbit.org/)
+- [micropython](https://wiki.mchobby.be/index.php?title=MicroPython-Accueil)
+- [Python](https://docs.python.org/)
+- [ampy](https://github.com/pycampers/ampy)
+- [pyflakes](https://github.com/PyCQA/pyflakes)
+- [NSIS](https://sourceforge.net/projects/nsis)
+- [masayloBlockly](https://github.com/agomezgar/masayloBlockly)
+- [Escornabot](escornabot.com) 
+- [Masaylo](https://github.com/agomezgar/masaylo)
