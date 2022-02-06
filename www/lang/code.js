@@ -15,7 +15,8 @@ Code.LANGUAGE_NAME = {
   'ru': '🇷🇺 Pусский',
   'heb': '🇮🇱 עִברִית',
   'zh': '🇹🇼 漢語',
-  'cn': '🇨🇳 汉语'
+  'cn': '🇨🇳 汉语',
+  'nl': '🇳🇱 Nederlands'
 };
 Code.LANGUAGE_RTL = ['ar', 'fa', 'he'];
 Code.getLang = function() {
